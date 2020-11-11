@@ -1,0 +1,92 @@
+
+
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+
+<div class="container">
+  <div class="card shadow">
+    <div class="card-header bg-info text-white"><h2>Course Rgistration Online System</h2></div>
+    <br>
+    <div class="container small">
+      <h6>John Done</h6>
+      <h6 class="float-right">83 of 120 credit</h6>
+      <h6>NVE-4472</h6>
+      <h6 class="float-right">Undergraduate</h6>
+      <h6>+2104353344</h6>
+<!--      <h6 class="float-right"><a routerLink="/register-list">Register Course</a> </h6>-->
+      <h6>johndone@dksu.edu</h6>
+
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card shadow">
+            <div class="card-header bg-info text-white"><h4>Registration</h4></div>
+            <div class="card-body">
+              <form (ngSubmit)="informService.Clicker()" [formGroup]="informService.IForm">
+                <div class="form-group">
+                  <label>Department</label>
+                  <select class="custom-select" formControlName="department">
+                    <option>Choose One Department</option>
+                    <option *ngFor="let dep of dpList">{{dep.name}}</option>
+                  </select>
+                  <div class="text-danger small" *ngIf="informService.IForm.controls.department.invalid">Department is required</div>
+                </div>
+                <div class="form-group">
+                  <label>Course</label>
+                  <select class="custom-select" formControlName="course">
+                    <option value="">Choose One Department</option>
+                    <option *ngFor="let co of courseList">{{co.name}}</option>
+                  </select>
+                  <div class="text-danger small" *ngIf="informService.IForm.controls.course.invalid">Course is required</div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Semester</label>
+                        <div class="row" formControlName="semester">
+                          <div class="col-sm-6">
+                            <input class="text-center" type="radio"  name="semester" value="winter" formControlName="semester">Winter
+                          &nbsp; &nbsp; &nbsp;
+                            <input class="text-center" type="radio"  name="semester" value="summer" formControlName="semester">Summer
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Year</label>
+                        <select class="custom-select" formControlName="year">
+                          <option value="">Choose One Year</option>
+                          <option *ngFor="let y of years">{{y}}</option>
+                        </select>
+                        <div class="text-danger small" *ngIf="informService.IForm.controls.year.invalid">Year is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group float-right">
+<!--                  <a routerLink="/inform" class="btn btn-primary">Submit Registration</a>-->
+                  <button [disabled]="informService.IForm.invalid" type="submit" class="btn btn-info">Submit Registration</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-header small bg-info text-white"> &nbsp;&nbsp; Dekastan State Uiverty (Civitas Universitas Dekastan)</div>
+
+</div>
+
+</body>
+</html>
+
+
+

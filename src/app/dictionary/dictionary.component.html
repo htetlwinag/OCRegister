@@ -1,0 +1,28 @@
+<div class="container shadow mt-5 mb-5 bg-transparent">
+  <div class="text-center mt-5">
+    <img src="assets/image/photo.jpg" class="img-rounded"  width="204" height="176">
+  </div>
+  <div class="row small">
+    <div class="col-sm-4 offset-4 mt-5">
+      <form class="example bg-light shadow" [formGroup]="disService.inputForm" (ngSubmit)="clicker()">
+        <input type="text" placeholder="Try One Another..." formControlName="name">
+        <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+  <div class="card shadow mt-5">
+    <div class="card-body">
+      <h2>{{word}}</h2>
+      <p>{{pronunciation}}</p>
+      <hr>
+      <div *ngFor="let def of definition">
+        <p>{{def.type}}</p><hr>
+        <div class="float-right small">
+          <img [src]="def.image_url" class="img-thumbnail bg-transparent">
+        </div><br/>
+        <strong>{{def.definition}}{{def.emoji}}</strong>
+        <p>"{{def.example}}"</p>
+      </div>
+    </div>
+  </div>
+</div>

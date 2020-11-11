@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Student List</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">errorCode: {{errorCode}}</div>
+          <div class="card-body">
+            <a class="float-right mb-2" routerLink="/login"><i class="fa fa-backward"></i> Back </a>
+            <table datatable [dtOptions]="dOption"  class="table table-hover table-bordered table-striped shadow">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Student Id</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Birthday Date</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let s of result">
+                <td>{{s.id}}</td>
+                <td>{{s.name}}</td>
+                <td>{{s.email}}</td>
+                <td>{{s.studentId}}</td>
+                <td>{{s.phone}}</td>
+                <td>{{s.address}}</td>
+                <td>{{s.birthDate}}</td>
+                <td>
+                  &nbsp; &nbsp;
+                  <a class="btn btn-outline-success btn-sm" (click)="onShow(detail, s)"><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp;
+                  <a (click)="open(content, s)" class="btn btn-outline-primary btn-sm"><span><i class="fa fa-edit text-success"></i></span></a> &nbsp;
+                  <a (click)="onOpen(close, s.id)" class="btn btn-outline-secondary btn-sm"><i class="fa fa-trash text-danger"></i></a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            message: {{message}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  Detail model-->
+  <ng-template #detail let-modal class="modal fade">
+    <div class="modal-header">
+      <h4 class="modal-title text-center" id="detailModal">Detail Student Info</h4>
+    </div>
+    <div class="modal-body">
+      Name: <strong >{{name}}</strong><br/>
+      StudentId: <strong >{{stdId}}</strong><br/>
+      Birthday Date: <strong >{{birthDate}}</strong><br/>
+      Email: <strong >{{email}}</strong><br/>
+      Address: <strong >{{address}}</strong><br/>
+      Contact Number: <strong >{{phone}}</strong><br/>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        close
+      </button>
+    </div>
+  </ng-template>
+  <!--  end Detail modal-->
+<!--  delete model-->
+  <ng-template #close let-modal class="modal fade">
+    <div class="modal-header">
+      <h4 class="modal-title text-center" id="modalTitle">Delete Student Info</h4>
+    </div>
+    <div class="modal-body">
+      <strong class="text-danger"> Are You Sure Delete?</strong>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        close
+      </button>
+      <button type="submit" class="btn btn-outline-success" (click)="deleteStudent()" (dblclick)="modal.close('Save click')">Agree</button>
+<!--      (click)="modal.close('Save click')"-->
+    </div>
+  </ng-template>
+<!--  end modal-->
+  <!--    Update          modal start-->
+  <ng-template #content let-modal class="modal fade small">
+    <div class="modal-header">
+      <strong ><h5 class="modal-title" id="modal-basic-title">Update Student Info</h5></strong>
+    </div>
+    <div class="modal-body" >
+      <form [formGroup]="updateForm" >
+          <div class="form-group">
+            <label><i class="fa fa-user"></i> Name</label>
+            <div class="input-group">
+              <input class="form-control" formControlName="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa fa-envelope"></i> Email</label>
+            <div class="input-group">
+              <input class="form-control" formControlName="email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label><i class="fa fa-user-plus"></i> StudentId</label>
+            <div class="input-group">
+              <input class="form-control" formControlName="studentId">
+            </div>
+          </div>
+          <div class="form-group">
+            <i class="fa fa-home"></i><label>Address</label>
+            <input type="text" class="form-control" formControlName="address">
+          </div>
+          <div class="form-group">
+            <label><i class="fa fa-phone"></i> Phone</label>
+            <div class="input-group">
+              <input class="form-control" formControlName="phone">
+            </div>
+          </div>
+        <div class="form-group">
+          <i class="fa fa-calendar"></i><label> &nbsp; Birthday Date</label>
+          <input type="text" class="form-control" formControlName="birthDate">
+        </div>
+          <hr>
+          <div class="form-group float-right">
+            <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              Close
+            </button> &nbsp;
+            <button type="button" class="btn btn-outline-success" (click)="onUpdate()" (dblclick)="modal.close('Save click')">Update</button>
+<!--            -->
+          </div>
+      </form>
+    </div>
+
+  </ng-template>
+
+  <!--              modal stop-->
+</body>
+</html>
+
+
+
